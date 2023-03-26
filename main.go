@@ -1,7 +1,9 @@
 package main
 
 import (
+    "github.com/joho/godotenv"
     pb "myGoApp/api"
+    "myGoApp/infrastructure/config"
     "myGoApp/service/user_service"
     "net"
     "fmt"
@@ -20,10 +22,20 @@ func main() {
         panic(err)
     }
 
+    if err := godotenv.Load(".env"); err != nil {
+        panic("Error loading .env file")
+    }
+
+    env, err := config.GetEnvConfig()
+
+    if err != nil {
+        panic(err)
+    }
+
     s := grpc.NewServer()
     reflection.Register(s)
 
-    conn, err := db.GetConn()
+    conn, err := db.GetConn(&env)
 
 
     userRepo := repository.NewRepo(conn)

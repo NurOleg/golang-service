@@ -9,6 +9,7 @@ require (
 )
 
 require (
+	github.com/caarlos0/env/v7 v7.1.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	golang.org/x/net v0.7.0 // indirect
