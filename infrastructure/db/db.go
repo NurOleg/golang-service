@@ -3,18 +3,22 @@ package db
 import (
     "database/sql"
     "github.com/go-sql-driver/mysql"
+    "myGoApp/infrastructure/helpers"
+    "fmt"
 )
 
 func GetConn() (*sql.DB, error) {
     var err error
     var db *sql.DB
 
+    dbAddr := fmt.Sprintf("%s:%s", helpers.GetEnvVar("DB_HOST"), helpers.GetEnvVar("DB_PORT"))
+
     cfg := mysql.Config{
-        User:   "root",
-        Passwd: "1234567",
+        User:   helpers.GetEnvVar("DB_LOGIN"),
+        Passwd: helpers.GetEnvVar("DB_PASS"),
         Net:    "tcp",
-        Addr:   "127.0.0.1:3306",
-        DBName: "modelshub",
+        Addr:   dbAddr,
+        DBName: helpers.GetEnvVar("DB_NAME"),
         AllowNativePasswords: true,
         }
 
