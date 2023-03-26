@@ -11,7 +11,7 @@ func GetConn() (*sql.DB, error) {
 
     cfg := mysql.Config{
         User:   "root",
-        Passwd: "123456",
+        Passwd: "1234567",
         Net:    "tcp",
         Addr:   "127.0.0.1:3306",
         DBName: "modelshub",
