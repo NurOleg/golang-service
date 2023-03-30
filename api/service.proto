@@ -17,3 +17,16 @@ message GetUserByIdRequest {
 message GetUserByIdResponse {
   string email = 1;
 }
+
+// The authorize service definition
+service AuthService {
+  rpc GetJwtToken (GetJwtTokenRequest) returns (GetJwtTokenResponse) {}
+}
+
+message GetJwtTokenRequest {
+  string email = 1;
+}
+
+message GetJwtTokenResponse {
+  string token = 1;
+}
