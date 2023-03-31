@@ -2,6 +2,7 @@ package user_service
 
 import (
     "context"
+    //"github.com/davecgh/go-spew/spew"
     "github.com/golang-jwt/jwt/v5"
     "golang.org/x/crypto/bcrypt"
     pb "myGoApp/api"
@@ -63,9 +64,9 @@ func (imp *Implementation) auth(email string, pass string) (*models.User, error)
         return nil, errors.New("User this creds doesnt exists")
     }
 
-    err := bcrypt.CompareHashAndPassword([]byte(userModel.PassHash), []byte(pass))
+    err := bcrypt.CompareHashAndPassword([]byte(userModel.Password), []byte(pass))
 
-    if err == nil {
+    if err != nil {
         return nil, errors.New("User this creds doesnt exists")
     }
 
