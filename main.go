@@ -4,7 +4,6 @@ import (
     "github.com/joho/godotenv"
     pb "myGoApp/api"
     "myGoApp/infrastructure/config"
-    "myGoApp/service/auth_service"
     "myGoApp/service/user_service"
     "net"
     "fmt"
@@ -37,7 +36,6 @@ func main() {
     userRepo := repository.NewRepo(conn)
 
     pb.RegisterUserServiceServer(s, user_service.New(userRepo))
-    pb.RegisterAuthServiceServer(s, auth_service.New())
 
     listener, err := net.Listen("tcp", ":8111")
     if err != nil {

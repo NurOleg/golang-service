@@ -6,6 +6,7 @@ option go_package="./service_proto";
 service UserService {
   // Sends a greeting
   rpc GetById (GetUserByIdRequest) returns (GetUserByIdResponse) {}
+  rpc GetJwtToken (GetJwtTokenRequest) returns (GetJwtTokenResponse) {}
 }
 
 // The request message containing the user's name.
@@ -18,13 +19,9 @@ message GetUserByIdResponse {
   string email = 1;
 }
 
-// The authorize service definition
-service AuthService {
-  rpc GetJwtToken (GetJwtTokenRequest) returns (GetJwtTokenResponse) {}
-}
-
 message GetJwtTokenRequest {
   string email = 1;
+  string password = 2;
 }
 
 message GetJwtTokenResponse {
