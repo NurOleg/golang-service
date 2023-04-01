@@ -17,11 +17,6 @@ import (
 )
 
 func main() {
-    listener, err := net.Listen("tcp", ":8111")
-    if err != nil {
-        panic(err)
-    }
-
     if err := godotenv.Load(".env"); err != nil {
         panic("Error loading .env file")
     }
@@ -39,9 +34,13 @@ func main() {
 
 
     userRepo := repository.NewRepo(conn)
-    userService := user_service.New(userRepo)
 
-    pb.RegisterUserServiceServer(s, userService)
+    pb.RegisterUserServiceServer(s, user_service.New(userRepo))
+
+    listener, err := net.Listen("tcp", ":8111")
+    if err != nil {
+        panic(err)
+    }
 
     if err := s.Serve(listener); err != nil {
         fmt.Printf("failed to serve: %v", err)

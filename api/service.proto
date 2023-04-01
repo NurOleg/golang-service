@@ -2,18 +2,24 @@ syntax = "proto3";
 
 option go_package="./service_proto";
 
-// The greeting service definition.
 service UserService {
-  // Sends a greeting
   rpc GetById (GetUserByIdRequest) returns (GetUserByIdResponse) {}
+  rpc GetJwtToken (GetJwtTokenRequest) returns (GetJwtTokenResponse) {}
 }
 
-// The request message containing the user's name.
 message GetUserByIdRequest {
   int32 id = 1;
 }
 
-// The response message containing the greetings
 message GetUserByIdResponse {
   string email = 1;
+}
+
+message GetJwtTokenRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message GetJwtTokenResponse {
+  string token = 1;
 }
